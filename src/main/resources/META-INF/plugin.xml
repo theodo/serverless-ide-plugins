@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>com.theodo.serverless.plugin.serverless-plugin</id>
+    <name>Serverless Framework Completion/Navigation/Syntax Plugin</name>
+    <vendor email="guillaumem@theodo.fr" url="http://theodo.fr">Theodo</vendor>
+
+    <description><![CDATA[
+    Implement navigation (from serverless files to code and vice-versa)<br>
+    Implement completion (based on AWS Serverless)<br>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="yaml" implementationClass="com.theodo.plugin.serverless.completion.SlsCompletionContributor"/>
+
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsFileNavigationHandler" order="last"/>
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsRefNavigationHandler" order="last"/>
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler" order="last"/>
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsArnRefNavigationHandler" order="last"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>

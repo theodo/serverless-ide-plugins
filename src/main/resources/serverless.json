@@ -1,0 +1,1625 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "Aws.Alb": {
+            "properties": {
+                "authorizers": {
+                    "$ref": "#/definitions/Aws.Authorizers"
+                },
+                "targetGroupPrefix": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.AlbEvent": {
+            "properties": {
+                "conditions": {
+                    "properties": {
+                        "host": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "listenerArn": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Aws.AlexaSkill": {
+            "properties": {
+                "appId": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.AlexaSmartHome": {
+            "properties": {
+                "appId": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.ApiGateway": {
+            "properties": {
+                "apiKeySourceType": {
+                    "type": "string"
+                },
+                "binaryMediaTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "minimumCompressionSize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "restApiId": {
+                    "type": "string"
+                },
+                "restApiResources": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "restApiRootResourceId": {
+                    "type": "string"
+                },
+                "websocketApiId": {
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Authorizers": {
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/Aws.CognitoAuthorizer"
+                    },
+                    {
+                        "$ref": "#/definitions/Aws.OidcAuthorizer"
+                    },
+                    {
+                        "$ref": "#/definitions/Aws.JwtAuthorizer"
+                    }
+                ]
+            },
+            "type": "object"
+        },
+        "Aws.AwsFunction": {
+            "properties": {
+                "awsKmsKeyArn": {
+                    "type": "string"
+                },
+                "condition": {
+                    "type": "string"
+                },
+                "dependsOn": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "destinations": {
+                    "$ref": "#/definitions/Aws.Destinations"
+                },
+                "environment": {
+                    "$ref": "#/definitions/Aws.Environment"
+                },
+                "events": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.Event"
+                    },
+                    "type": "array"
+                },
+                "handler": {
+                    "type": "string"
+                },
+                "layers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "memorySize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "onError": {
+                    "type": "string"
+                },
+                "package": {
+                    "$ref": "#/definitions/Aws.Package"
+                },
+                "provisionedConcurrency": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "reservedConcurrency": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "role": {
+                    "type": "string"
+                },
+                "runtime": {
+                    "type": "string"
+                },
+                "tags": {
+                    "$ref": "#/definitions/Aws.Tags"
+                },
+                "timeout": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "tracing": {
+                    "type": "string"
+                },
+                "vpc": {
+                    "$ref": "#/definitions/Aws.Vpc"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CloudFormationResource": {
+            "properties": {
+                "DeletionPolicy": {
+                    "type": "string"
+                },
+                "DependsOn": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "Properties": {
+                    "additionalProperties": {
+                    },
+                    "type": "object"
+                },
+                "Type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CloudFormationResources": {
+            "additionalProperties": {
+                "$ref": "#/definitions/Aws.CloudFormationResource"
+            },
+            "type": "object"
+        },
+        "Aws.CloudFront": {
+            "properties": {
+                "eventType": {
+                    "type": "string"
+                },
+                "includeBody": {
+                    "type": "boolean"
+                },
+                "origin": {
+                    "$ref": "#/definitions/Aws.Origin"
+                },
+                "pathPattern": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CloudwatchEvent": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "event": {
+                    "type": "string"
+                },
+                "input": {
+                    "$ref": "#/definitions/Aws.Input"
+                },
+                "inputPath": {
+                    "type": "string"
+                },
+                "inputTransformer": {
+                    "$ref": "#/definitions/Aws.InputTransformer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CloudwatchEventType": {
+            "properties": {
+                "detail": {
+                    "$ref": "#/definitions/Aws.Detail"
+                },
+                "detail-type": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "source": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CloudwatchLog": {
+            "properties": {
+                "filter": {
+                    "type": "string"
+                },
+                "logGroup": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CognitoAuthorizer": {
+            "properties": {
+                "allowUnauthenticated": {
+                    "type": "boolean"
+                },
+                "requestExtraParams": {
+                    "properties": {
+                        "prompt": {
+                            "type": "string"
+                        },
+                        "redirect": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "scope": {
+                    "type": "string"
+                },
+                "sessionCookieName": {
+                    "type": "string"
+                },
+                "sessionTimeout": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "cognito"
+                    ],
+                    "type": "string"
+                },
+                "userPoolArn": {
+                    "type": "string"
+                },
+                "userPoolClientId": {
+                    "type": "string"
+                },
+                "userPoolDomain": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.CognitoUserPool": {
+            "properties": {
+                "existing": {
+                    "type": "boolean"
+                },
+                "pool": {
+                    "type": "string"
+                },
+                "trigger": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.DeadLetterTargetImport": {
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.DeploymentBucket": {
+            "properties": {
+                "blockPublicAccess": {
+                    "type": "boolean"
+                },
+                "maxPreviousDeploymentArtifacts": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "serverSideEncryption": {
+                    "type": "string"
+                },
+                "sseCustomerAlgorithim": {
+                    "type": "string"
+                },
+                "sseCustomerKey": {
+                    "type": "string"
+                },
+                "sseCustomerKeyMD5": {
+                    "type": "string"
+                },
+                "sseKMSKeyId": {
+                    "type": "string"
+                },
+                "tags": {
+                    "$ref": "#/definitions/Aws.Tags"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Destinations": {
+            "properties": {
+                "onFailure": {
+                    "type": "string"
+                },
+                "onSuccess": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Detail": {
+            "additionalProperties": {
+                "items": {
+                    "type": "string"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
+        "Aws.Environment": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "Aws.Event": {
+            "properties": {
+                "alb": {
+                    "$ref": "#/definitions/Aws.AlbEvent"
+                },
+                "alexaSkill": {
+                    "$ref": "#/definitions/Aws.AlexaSkill"
+                },
+                "alexaSmartHome": {
+                    "$ref": "#/definitions/Aws.AlexaSmartHome"
+                },
+                "cloudFront": {
+                    "$ref": "#/definitions/Aws.CloudFront"
+                },
+                "cloudwatchEvent": {
+                    "$ref": "#/definitions/Aws.CloudwatchEvent"
+                },
+                "cloudwatchLog": {
+                    "$ref": "#/definitions/Aws.CloudwatchLog"
+                },
+                "cognitoUserPool": {
+                    "$ref": "#/definitions/Aws.CognitoUserPool"
+                },
+                "eventBridge": {
+                    "$ref": "#/definitions/Aws.EventBridge"
+                },
+                "http": {
+                    "$ref": "#/definitions/Aws.Http"
+                },
+                "httpApi": {
+                    "$ref": "#/definitions/Aws.HttpApiEvent"
+                },
+                "iot": {
+                    "$ref": "#/definitions/Aws.Iot"
+                },
+                "s3": {
+                    "$ref": "#/definitions/Aws.S3"
+                },
+                "schedule": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Aws.Schedule"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "sns": {
+                    "$ref": "#/definitions/Aws.Sns"
+                },
+                "sqs": {
+                    "$ref": "#/definitions/Aws.Sqs"
+                },
+                "stream": {
+                    "$ref": "#/definitions/Aws.Stream"
+                },
+                "websocket": {
+                    "$ref": "#/definitions/Aws.Websocket"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.EventBridge": {
+            "properties": {
+                "eventBus": {
+                    "type": "string"
+                },
+                "input": {
+                    "$ref": "#/definitions/Aws.Input"
+                },
+                "inputPath": {
+                    "type": "string"
+                },
+                "inputTransformer": {
+                    "$ref": "#/definitions/Aws.InputTransformer"
+                },
+                "pattern": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Aws.PatternExisting"
+                        },
+                        {
+                            "$ref": "#/definitions/Aws.PatternInput"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Functions": {
+            "additionalProperties": {
+                "$ref": "#/definitions/Aws.AwsFunction"
+            },
+            "type": "object"
+        },
+        "Aws.Http": {
+            "properties": {
+                "authorizer": {
+                    "$ref": "#/definitions/Aws.HttpAuthorizer"
+                },
+                "cors": {
+                    "type": "boolean"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "private": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpApi": {
+            "properties": {
+                "authorizers": {
+                    "$ref": "#/definitions/Aws.Authorizers"
+                },
+                "cors": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpApiEvent": {
+            "properties": {
+                "authorizer": {
+                    "$ref": "#/definitions/Aws.HttpApiEventAuthorizer"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpApiEventAuthorizer": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "scopes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpApiLogs": {
+            "properties": {
+                "format": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpAuthorizer": {
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "identitySource": {
+                    "type": "string"
+                },
+                "identityValidationExpression": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "resultTtlInSeconds": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.IamRoleStatement": {
+            "properties": {
+                "Action": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "Condition": {
+                    "additionalProperties": {
+                    },
+                    "type": "object"
+                },
+                "Effect": {
+                    "enum": [
+                        "Allow",
+                        "Deny"
+                    ],
+                    "type": "string"
+                },
+                "NotAction": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "NotResource": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "Resource": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "Sid": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Input": {
+            "additionalProperties": {
+            },
+            "type": "object"
+        },
+        "Aws.InputTransformer": {
+            "properties": {
+                "inputPathsMap": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "inputTemplate": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Iot": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sql": {
+                    "type": "string"
+                },
+                "sqlVersion": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.JwtAuthorizer": {
+            "properties": {
+                "audience": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "identitySource": {
+                    "type": "string"
+                },
+                "issuerUrl": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Layer": {
+            "properties": {
+                "allowedAccounts": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "compatibleRuntimes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "licenseInfo": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "retain": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Layers": {
+            "additionalProperties": {
+                "$ref": "#/definitions/Aws.Layer"
+            },
+            "type": "object"
+        },
+        "Aws.Logs": {
+            "properties": {
+                "frameworkLambda": {
+                    "type": "boolean"
+                },
+                "httpApi": {
+                    "$ref": "#/definitions/Aws.HttpApiLogs"
+                },
+                "restApi": {
+                    "$ref": "#/definitions/Aws.RestApiLogs"
+                },
+                "websocket": {
+                    "$ref": "#/definitions/Aws.WebsocketLogs"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.OidcAuthorizer": {
+            "properties": {
+                "allowUnauthenticated": {
+                    "type": "boolean"
+                },
+                "authorizationEndpoint": {
+                    "type": "string"
+                },
+                "clientId": {
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "type": "string"
+                },
+                "issuer": {
+                    "type": "string"
+                },
+                "requestExtraParams": {
+                    "properties": {
+                        "prompt": {
+                            "type": "string"
+                        },
+                        "redirect": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "scope": {
+                    "type": "string"
+                },
+                "sessionCookieName": {
+                    "type": "string"
+                },
+                "sessionTimeout": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "tokenEndpoint": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "oidc"
+                    ],
+                    "type": "string"
+                },
+                "useExistingClientSecret": {
+                    "type": "boolean"
+                },
+                "userInfoEndpoint": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Origin": {
+            "properties": {
+                "CustomOriginConfig": {
+                    "properties": {
+                        "OriginProtocolPolicy": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "DomainName": {
+                    "type": "string"
+                },
+                "OriginPath": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Output": {
+            "properties": {
+                "Condition": {
+                },
+                "Description": {
+                    "type": "string"
+                },
+                "Export": {
+                    "properties": {
+                        "Name": {
+                        }
+                    },
+                    "type": "object"
+                },
+                "Value": {
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Outputs": {
+            "additionalProperties": {
+                "$ref": "#/definitions/Aws.Output"
+            },
+            "type": "object"
+        },
+        "Aws.Package": {
+            "properties": {
+                "artifact": {
+                    "type": "string"
+                },
+                "exclude": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "excludeDevDependencies": {
+                    "type": "boolean"
+                },
+                "include": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "individually": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.PatternExisting": {
+            "properties": {
+                "source": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.PatternInput": {
+            "properties": {
+                "detail": {
+                    "$ref": "#/definitions/Aws.Detail"
+                },
+                "detail-type": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "source": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Provider": {
+            "properties": {
+                "alb": {
+                    "$ref": "#/definitions/Aws.Alb"
+                },
+                "apiGateway": {
+                    "$ref": "#/definitions/Aws.ApiGateway"
+                },
+                "apiKeys": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "apiName": {
+                    "type": "string"
+                },
+                "cfnRole": {
+                    "type": "string"
+                },
+                "deploymentBucket": {
+                    "$ref": "#/definitions/Aws.DeploymentBucket"
+                },
+                "deploymentPrefix": {
+                    "type": "string"
+                },
+                "endpointType": {
+                    "type": "string"
+                },
+                "environment": {
+                    "$ref": "#/definitions/Aws.Environment"
+                },
+                "httpApi": {
+                    "$ref": "#/definitions/Aws.HttpApi"
+                },
+                "iamManagedPolicies": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iamRoleStatements": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.IamRoleStatement"
+                    },
+                    "type": "array"
+                },
+                "logRetentionInDays": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "logs": {
+                    "$ref": "#/definitions/Aws.Logs"
+                },
+                "memorySize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "name": {
+                    "enum": [
+                        "aws"
+                    ],
+                    "type": "string"
+                },
+                "notificationArns": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "profile": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "reservedConcurrency": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "resourcePolicy": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.ResourcePolicy"
+                    },
+                    "type": "array"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "rolePermissionsBoundary": {
+                    "type": "string"
+                },
+                "rollbackConfiguration": {
+                    "$ref": "#/definitions/Aws.RollbackConfiguration"
+                },
+                "runtime": {
+                    "type": "string"
+                },
+                "stackName": {
+                    "type": "string"
+                },
+                "stackParameters": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.StackParameters"
+                    },
+                    "type": "array"
+                },
+                "stackPolicy": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.ResourcePolicy"
+                    },
+                    "type": "array"
+                },
+                "stackTags": {
+                    "$ref": "#/definitions/Aws.Tags"
+                },
+                "stage": {
+                    "type": "string"
+                },
+                "tags": {
+                    "$ref": "#/definitions/Aws.Tags"
+                },
+                "timeout": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "tracing": {
+                    "$ref": "#/definitions/Aws.Tracing"
+                },
+                "usagePlan": {
+                    "$ref": "#/definitions/Aws.UsagePlan"
+                },
+                "versionFunctions": {
+                    "type": "boolean"
+                },
+                "vpc": {
+                    "$ref": "#/definitions/Aws.Vpc"
+                },
+                "websocketsApiName": {
+                    "type": "string"
+                },
+                "websocketsApiRouteSelectionExpression": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Quota": {
+            "properties": {
+                "limit": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "offset": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "period": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.RedrivePolicy": {
+            "properties": {
+                "deadLetterTargetArn": {
+                    "type": "string"
+                },
+                "deadLetterTargetImport": {
+                    "$ref": "#/definitions/Aws.DeadLetterTargetImport"
+                },
+                "deadLetterTargetRef": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.ResourcePolicy": {
+            "properties": {
+                "Action": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "Condition": {
+                    "additionalProperties": {
+                    },
+                    "type": "object"
+                },
+                "Effect": {
+                    "enum": [
+                        "Allow",
+                        "Deny"
+                    ],
+                    "type": "string"
+                },
+                "Principal": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "Resource": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Resources": {
+            "properties": {
+                "Outputs": {
+                    "$ref": "#/definitions/Aws.Outputs"
+                },
+                "Resources": {
+                    "$ref": "#/definitions/Aws.CloudFormationResources"
+                },
+                "extensions": {
+                    "$ref": "#/definitions/Aws.CloudFormationResources"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.RestApiLogs": {
+            "properties": {
+                "accessLogging": {
+                    "type": "boolean"
+                },
+                "executionLogging": {
+                    "type": "boolean"
+                },
+                "format": {
+                    "type": "string"
+                },
+                "fullExecutionData": {
+                    "type": "boolean"
+                },
+                "level": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "roleManagedExternally": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.RollbackConfiguration": {
+            "properties": {
+                "MonitoringTimeInMinutes": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "RollbackTriggers": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.RollbackTrigger"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.RollbackTrigger": {
+            "properties": {
+                "Arn": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.S3": {
+            "properties": {
+                "bucket": {
+                    "type": "string"
+                },
+                "event": {
+                    "type": "string"
+                },
+                "existing": {
+                    "type": "boolean"
+                },
+                "rules": {
+                    "items": {
+                        "$ref": "#/definitions/Aws.S3Rule"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.S3Rule": {
+            "properties": {
+                "prefix": {
+                    "type": "string"
+                },
+                "suffix": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Schedule": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "input": {
+                    "$ref": "#/definitions/Aws.Input"
+                },
+                "inputPath": {
+                    "type": "string"
+                },
+                "inputTransformer": {
+                    "$ref": "#/definitions/Aws.InputTransformer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "rate": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Serverless": {
+            "properties": {
+                "frameworkVersion": {
+                    "type": "string"
+                },
+                "functions": {
+                    "$ref": "#/definitions/Aws.Functions"
+                },
+                "layers": {
+                    "$ref": "#/definitions/Aws.Layers"
+                },
+                "package": {
+                    "$ref": "#/definitions/Aws.Package"
+                },
+                "provider": {
+                    "$ref": "#/definitions/Aws.Provider"
+                },
+                "resources": {
+                    "$ref": "#/definitions/Aws.Resources"
+                },
+                "service": {
+                    "$ref": "#/definitions/Aws.Service"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Service": {
+            "properties": {
+                "awsKmsKeyArn": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Sns": {
+            "properties": {
+                "displayName": {
+                    "type": "string"
+                },
+                "filterPolicy": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "type": "object"
+                        }
+                    ]
+                },
+                "redrivePolicy": {
+                    "$ref": "#/definitions/Aws.RedrivePolicy"
+                },
+                "topicName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Sqs": {
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "batchSize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "maximumRetryAttempts": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Aws.StackParameters": {
+            "properties": {
+                "ParameterKey": {
+                    "type": "string"
+                },
+                "ParameterValue": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Stream": {
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "batchSize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "startingPosition": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "Aws.Throttle": {
+            "properties": {
+                "burstLimit": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "rateLimit": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Tracing": {
+            "properties": {
+                "apiGateway": {
+                    "type": "boolean"
+                },
+                "lambda": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.UsagePlan": {
+            "properties": {
+                "quota": {
+                    "$ref": "#/definitions/Aws.Quota"
+                },
+                "throttle": {
+                    "$ref": "#/definitions/Aws.Throttle"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Vpc": {
+            "properties": {
+                "securityGroupIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subnetIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.Websocket": {
+            "properties": {
+                "authorizer": {
+                    "$ref": "#/definitions/Aws.WebsocketAuthorizer"
+                },
+                "route": {
+                    "type": "string"
+                },
+                "routeResponseSelectionExpression": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.WebsocketAuthorizer": {
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "identitySource": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.WebsocketLogs": {
+            "properties": {
+                "level": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+
+    "allOf": [
+      {
+        "$ref": "#/definitions/Aws.Serverless"
+      }
+    ]
+}
+
