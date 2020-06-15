@@ -19,4 +19,8 @@ Jetbrains Plugin to add Navigation/Completion/Syntax on SERVERLESS files
 - Code completion for AWS serverless file
 ![alt text](./docs/completion.png "AWS Completion")
 
-- Syntax highlighting of errors
+- Syntax highlighting of errors: step not found
+![alt text](./docs/syntax.step.not.found.png "Step not found")
+
+- Syntax highlighting of errors: step unused (dead code)
+![alt text](./docs/syntax.step.unused.png "Step not found")
