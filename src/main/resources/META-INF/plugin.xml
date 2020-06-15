@@ -20,6 +20,7 @@
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsRefNavigationHandler" order="last"/>
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler" order="last"/>
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsArnRefNavigationHandler" order="last"/>
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsStepsNavigationHandler" order="last"/>
     </extensions>
 
     <actions>
