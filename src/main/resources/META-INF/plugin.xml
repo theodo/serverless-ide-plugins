@@ -35,6 +35,13 @@
                          displayName="Undefined Steps in StateMachine (Step not found in file)"
                          implementationClass="com.theodo.plugin.serverless.syntax.UnknownStepInspection"/>
 
+        <localInspection language="yaml"
+                         enabledByDefault="true"
+                         groupBundle="messages.InspectionsBundle"
+                         groupKey="group.names.probable.bugs"
+                         displayName="Unused Steps in StateMachine (Unused Step found in file)"
+                         implementationClass="com.theodo.plugin.serverless.syntax.UnusedStepInspection"/>
+
     </extensions>
 
     <actions>
