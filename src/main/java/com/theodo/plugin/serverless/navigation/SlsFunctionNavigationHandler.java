@@ -58,7 +58,7 @@ public class SlsFunctionNavigationHandler implements GotoDeclarationHandler {
         return null;
     }
 
-    private PsiElement  tryToOpenCodeFile(@NotNull PsiElement sourceElement, String relativePath, VirtualFile directory) {
+    public static PsiElement  tryToOpenCodeFile(@NotNull PsiElement sourceElement, String relativePath, VirtualFile directory) {
         VirtualFile destFile = LocalFileSystem.getInstance().findFileByPath(directory.getPath() + File.separator + relativePath);
         if (destFile != null) {
             return PsiManager.getInstance(sourceElement.getProject()).findFile(destFile);
@@ -66,7 +66,7 @@ public class SlsFunctionNavigationHandler implements GotoDeclarationHandler {
         return null;
     }
 
-    private boolean isLambda(YAMLKeyValue parent) {
+    public static boolean isLambda(YAMLKeyValue parent) {
         while (parent != null) {
             if (parent.getKeyText().equals("functions")) {
                 return true;

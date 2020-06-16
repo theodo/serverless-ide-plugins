@@ -23,4 +23,7 @@ Jetbrains Plugin to add Navigation/Completion/Syntax on SERVERLESS files
 ![alt text](./docs/syntax.step.not.found.png "Step not found")
 
 - Syntax highlighting of errors: step unused (dead code)
-![alt text](./docs/syntax.step.unused.png "Step not found")
+![alt text](./docs/syntax.step.unused.png "Step unused")
+
+- Syntax highlighting of errors: lambda code file not found
+![alt text](./docs/syntax.lambda.code.not.found.png "Lambda Code not found")

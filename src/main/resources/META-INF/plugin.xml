@@ -42,6 +42,13 @@
                          displayName="Unused Steps in StateMachine (Unused Step found in file)"
                          implementationClass="com.theodo.plugin.serverless.syntax.UnusedStepInspection"/>
 
+        <localInspection language="yaml"
+                         enabledByDefault="true"
+                         groupBundle="messages.InspectionsBundle"
+                         groupKey="group.names.probable.bugs"
+                         displayName="Lambda code file not found"
+                         implementationClass="com.theodo.plugin.serverless.syntax.UnusedLambdaInspection"/>
+
     </extensions>
 
     <actions>
