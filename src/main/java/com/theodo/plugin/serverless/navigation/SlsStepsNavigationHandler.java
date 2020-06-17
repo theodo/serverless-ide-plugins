@@ -18,8 +18,6 @@ import java.util.regex.Pattern;
  * NAVIGATE from '${self:something} to something DEFINITION
  */
 public class SlsStepsNavigationHandler implements GotoDeclarationHandler {
-    private static final Pattern REF_PATTERN = Pattern.compile("(?:\\$\\{self:([^$^}]*))");
-
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
         final IElementType elementType = PsiUtilCore.getElementType(sourceElement);

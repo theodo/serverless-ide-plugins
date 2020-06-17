@@ -48,14 +48,19 @@ public class SlsArnRefNavigationHandler implements GotoDeclarationHandler {
             List<YAMLSequenceItem> items = sequence.getItems();
             if (items.isEmpty()) return null;
 
-            PsiSearchHelper searchHelper = PsiSearchHelper.getInstance(sourceElement.getProject());
-            GlobalSearchScope allScope = GlobalSearchScope.allScope(sourceElement.getProject());
-            GlobalSearchScope yamlTypeScope = GlobalSearchScope.getScopeRestrictedByFileTypes(allScope, YAMLFileType.YML);
-            SearchInYamlFileProcessor processor = new SearchInYamlFileProcessor(element -> element instanceof YAMLKeyValue && ((YAMLKeyValue) element).getKeyText().equals(sourceElement.getText()));
-            searchHelper.processAllFilesWithWord(sourceElement.getText(), yamlTypeScope, processor, true);
-            return processor.get();
+            return searchLambdaInFiles(sourceElement);
         }
 
         return null;
+    }
+
+    public static PsiElement[] searchLambdaInFiles(PsiElement sourceElement) {
+        if(sourceElement == null) return null;
+        PsiSearchHelper searchHelper = PsiSearchHelper.getInstance(sourceElement.getProject());
+        GlobalSearchScope allScope = GlobalSearchScope.allScope(sourceElement.getProject());
+        GlobalSearchScope yamlTypeScope = GlobalSearchScope.getScopeRestrictedByFileTypes(allScope, YAMLFileType.YML);
+        SearchInYamlFileProcessor processor = new SearchInYamlFileProcessor(element -> element instanceof YAMLKeyValue && ((YAMLKeyValue) element).getKeyText().equals(sourceElement.getText()));
+        searchHelper.processAllFilesWithWord(sourceElement.getText(), yamlTypeScope, processor, true);
+        return processor.get();
     }
 }

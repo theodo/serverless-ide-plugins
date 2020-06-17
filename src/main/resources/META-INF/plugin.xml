@@ -58,6 +58,13 @@
                          displayName="Lambda code file not found"
                          implementationClass="com.theodo.plugin.serverless.syntax.UnknownIncludedFileInspection"/>
 
+        <localInspection language="yaml"
+                         enabledByDefault="true"
+                         groupBundle="messages.InspectionsBundle"
+                         groupKey="group.names.probable.bugs"
+                         displayName="Lambda code file not found"
+                         implementationClass="com.theodo.plugin.serverless.syntax.UnknownLambdaInspection"/>
+
     </extensions>
 
     <actions>
