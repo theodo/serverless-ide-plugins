@@ -51,7 +51,7 @@ public class UnusedStepInspection extends LocalInspectionTool {
 
         @Override
         public void visitKeyValue(@NotNull YAMLKeyValue keyValue) {
-            if("Next".equals(keyValue.getKeyText()) || "StartAt".equals(keyValue.getKeyText())){
+            if("Next".equals(keyValue.getKeyText()) || "StartAt".equals(keyValue.getKeyText()) || "Default".equals(keyValue.getKeyText())){
                 if(keyValue.getValueText().equals(stepName)){
                     foundUsage = true;
                 }
