@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * NAVIGATE from '${file:path/path/file} TO the file ./path/path/file
  */
 public class SlsFileNavigationHandler implements GotoDeclarationHandler {
-    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\)\\}");
+    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\).*}");
 
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {

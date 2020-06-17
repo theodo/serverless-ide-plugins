@@ -76,11 +76,7 @@ public class SlsCompletionContributor extends CompletionContributor {
     private static final PatternCondition<PsiFile> SLS_YAML_CONFIGURATION = new PatternCondition<PsiFile>("SLS definition files") {
         @Override
         public boolean accepts(@NotNull PsiFile psiFile, ProcessingContext processingContext) {
-            if (psiFile.getFileType() != YAMLFileType.YML) {
-                return false;
-            }
-
-            return "serverless.yml".equals(psiFile.getName());
+            return psiFile.getFileType() == YAMLFileType.YML;// Without any other indicator in the file itself, it's difficult to say if a YAML is or not 'serverless'
         }
     };
 }

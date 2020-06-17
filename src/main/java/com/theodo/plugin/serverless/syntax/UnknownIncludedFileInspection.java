@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class UnknownIncludedFileInspection extends LocalInspectionTool {
 
-    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\)\\}");
+    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\).*}");
 
     public @Nullable String getStaticDescription() {
         return "Highlight Undefined Included files";
