@@ -3,30 +3,21 @@ package com.theodo.plugin.serverless.navigation;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiSearchHelper;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiElementFilter;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.Processor;
 import com.theodo.plugin.serverless.navigation.utils.SearchInYamlFileProcessor;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.YAMLFileType;
 import org.jetbrains.yaml.YAMLTokenTypes;
-import org.jetbrains.yaml.psi.*;
-import org.jetbrains.yaml.psi.impl.YAMLArrayImpl;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.jetbrains.yaml.psi.YAMLKeyValue;
 
 /**
- * NAVIGATE from 'Fn::GetAtt [ value, 'ARN'] TO value definition found in any YAML file
+ * NAVIGATE from 'Fn::ImportValue : xxxx TO value definition found in any YAML file under tag Export: Name: xxxx
  */
-public class SlsArnRefNavigationHandler implements GotoDeclarationHandler {
+public class SlsImportValueNavigationHandler implements GotoDeclarationHandler {
 
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
@@ -35,27 +26,27 @@ public class SlsArnRefNavigationHandler implements GotoDeclarationHandler {
             YAMLKeyValue parent = PsiTreeUtil.getParentOfType(sourceElement, YAMLKeyValue.class);
             if (parent == null) return null;
 
-            if (!"Fn::GetAtt".equals(parent.getKeyText())) {
+            if (!"Fn::ImportValue".equals(parent.getKeyText())) {
                 return null;
             }
-
-            YAMLValue value = parent.getValue();
-            if (!(value instanceof YAMLArrayImpl)) {
-                return null;
-            }
-
-            YAMLArrayImpl sequence = (YAMLArrayImpl) value;
-            List<YAMLSequenceItem> items = sequence.getItems();
-            if (items.isEmpty()) return null;
 
             PsiSearchHelper searchHelper = PsiSearchHelper.getInstance(sourceElement.getProject());
             GlobalSearchScope allScope = GlobalSearchScope.allScope(sourceElement.getProject());
             GlobalSearchScope yamlTypeScope = GlobalSearchScope.getScopeRestrictedByFileTypes(allScope, YAMLFileType.YML);
-            SearchInYamlFileProcessor processor = new SearchInYamlFileProcessor(element -> element instanceof YAMLKeyValue && ((YAMLKeyValue) element).getKeyText().equals(sourceElement.getText()));
-            searchHelper.processAllFilesWithWord(sourceElement.getText(), yamlTypeScope, processor, true);
+            SearchInYamlFileProcessor processor = new SearchInYamlFileProcessor(element -> {
+                if(element instanceof YAMLKeyValue){
+                    YAMLKeyValue keyValue = (YAMLKeyValue) element;
+                    if("Name".equals(keyValue.getKeyText()) && sourceElement.getText().equals(keyValue.getValueText())) {
+                        YAMLKeyValue parent1 = PsiTreeUtil.getParentOfType(keyValue, YAMLKeyValue.class);
+                        return parent1 != null && "Export".equals(parent1.getKeyText());
+                    }
+                }
+                return false;
+            });
+            searchHelper.processAllFilesWithWord("Export", yamlTypeScope, processor, true);
             return processor.get();
         }
-
         return null;
     }
+
 }

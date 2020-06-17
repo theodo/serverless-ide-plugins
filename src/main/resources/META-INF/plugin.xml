@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.theodo.serverless.plugin.serverless-plugin</id>
-    <name>Serverless Framework Completion/Navigation/Syntax Plugin</name>
+    <name>Serverless Framework Completion/Navigation/Syntax</name>
     <vendor email="guillaumem@theodo.fr" url="http://theodo.fr">Theodo</vendor>
 
     <description><![CDATA[
@@ -18,6 +18,8 @@
                                 implementationClass="com.theodo.plugin.serverless.completion.SlsCompletionContributor"/>
 
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsFileNavigationHandler"
+                                order="last"/>
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsImportValueNavigationHandler"
                                 order="last"/>
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsRefNavigationHandler"
                                 order="last"/>
