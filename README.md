@@ -27,3 +27,6 @@ Jetbrains Plugin to add Navigation/Completion/Syntax on SERVERLESS files
 
 - Syntax highlighting of errors: lambda code file not found
 ![alt text](./docs/syntax.lambda.code.not.found.png "Lambda Code not found")
+
+- Syntax highlighting of errors: included file not found
+![alt text](./docs/syntax.included.file.not.found.png "Lambda Code not found")
