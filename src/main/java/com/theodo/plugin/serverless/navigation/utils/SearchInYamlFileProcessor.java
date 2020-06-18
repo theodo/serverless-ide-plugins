@@ -32,6 +32,6 @@ public class SearchInYamlFileProcessor implements Processor<PsiFile> {
 
     public PsiElement[] get() {
         if(foundElements.isEmpty()) return null;
-        return foundElements.toArray(new PsiElement[foundElements.size()]);
+        return foundElements.toArray(new PsiElement[0]);
     }
 }

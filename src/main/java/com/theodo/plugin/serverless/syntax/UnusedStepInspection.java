@@ -33,7 +33,9 @@ public class UnusedStepInspection extends LocalInspectionTool {
                     UsageDetection visitor = new UsageDetection(stepName);
                     containingFile.acceptChildren(visitor);
                     if(!visitor.foundUsage){
-                        holder.registerProblem(keyValue.getKey(), "Step not used in this file");
+                        if (keyValue.getKey() != null) {
+                            holder.registerProblem(keyValue.getKey(), "Step not used in this file");
+                        }
                     }
                 }
             }

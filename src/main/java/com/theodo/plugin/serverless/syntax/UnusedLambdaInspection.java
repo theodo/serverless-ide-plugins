@@ -6,12 +6,10 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
-import org.jetbrains.yaml.psi.YamlRecursivePsiElementVisitor;
 
 import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.isLambda;
 import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.tryToOpenCodeFile;
@@ -50,7 +48,9 @@ public class UnusedLambdaInspection extends LocalInspectionTool {
                     codeFile = tryToOpenCodeFile(keyValue, fileAndMethod[0] + ".py", directory);
                     if (codeFile != null) return;
 
-                    holder.registerProblem(keyValue.getValue(), "Lambda Code File not found");
+                    if (keyValue.getValue() != null) {
+                        holder.registerProblem(keyValue.getValue(), "Lambda Code File not found");
+                    }
                 }
             }
         };

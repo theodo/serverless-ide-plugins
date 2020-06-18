@@ -12,8 +12,6 @@ import org.jetbrains.yaml.YAMLUtil;
 import org.jetbrains.yaml.psi.YAMLFile;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
-import java.util.regex.Pattern;
-
 /**
  * NAVIGATE from '${self:something} to something DEFINITION
  */

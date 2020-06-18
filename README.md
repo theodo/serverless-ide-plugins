@@ -5,7 +5,7 @@ Add Navigation/Completion/Syntax on SERVERLESS files
 
 - Navigation within serverless.yml file (find resources): `${self:xxx.yyy.zzz}`<br> 
 Go directly to `xxx.yyy.zzz` defined in the file or in another Yaml file.
-If the tag `xxx.yyy.zzz` is not found, search longest matching sub tag if exist (`xxx.yyy` then `xxx`)
+If the tag `xxx.yyy.zzz` is not found, search the longest matching sub tag if exist (`xxx.yyy` then `xxx`)
 ![alt text](./docs/jump.to.definition.png "Jump to value definition")
 
 - Navigation from serverless.yml to imported files: `$file(./directory/an_included_file.yml)`<br>
@@ -15,14 +15,14 @@ If the tag `xxx.yyy.zzz` is not found, search longest matching sub tag if exist 
 Search for `handler` tag located under `functions` tag. Then open the associated code file.
 ![alt text](./docs/jump.to.code.png "Jump to lambda code implementation")
 
-- Navigation from step in state machine to lambda definition (found in any Yaml file)<br>
+- Navigation from a given step in state machine to lambda definition (found in any Yaml file)<br>
 Search for `Fn::GetAtt: [XXXX, Arn]` located inside Step in State Machine definition. <br>
-Then jump to `XXXX` definition found in serverless file.
+Then jump to `XXXX` definition found in serverless files.
 ![alt text](./docs/jump.to.lambda.png "Jump to lambda definition")
 
 - Navigation from state machine "step" usage to "step" definition<br>
 Search for `Next: XXXX` or `Default: XXXX`tags in state machine definition.<br>
-Then jump to `XXXX` step found in current file (if exists)
+Then jump to `XXXX` step found in the current file (if exists)
 
 <h3>Code Completion</h3>
 
@@ -45,6 +45,6 @@ Search for Steps defined in a given State Machine not used within `Next` or `Def
 Search for lambda definition with erroneous associated code file 
 ![alt text](./docs/syntax.lambda.code.not.found.png "Lambda Code not found")
 
-- Syntax highlighting of errors: included file not found<br>
+- Syntax highlighting of errors: an included file not found<br>
 Search for include tags leading to non existing included file.
 ![alt text](./docs/syntax.included.file.not.found.png "Lambda Code not found")
