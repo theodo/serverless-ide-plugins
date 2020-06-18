@@ -4,8 +4,29 @@
     <vendor email="guillaumem@theodo.fr" url="http://theodo.fr">Theodo</vendor>
 
     <description><![CDATA[
-    Implement navigation (from serverless files to code and vice-versa)<br>
-    Implement completion (based on AWS Serverless)<br>
+    <h2>Navigation</h2>
+    <ul>
+    <li>Navigation:GoTo ARN from 'Fn::GetAtt'</li>
+    <li>Navigation:GoTo File included with '${file(...)}'</li>
+    <li>Navigation:GoTo Lambda Code (ts, js, py) from handler</li>
+    <li>Navigation:GoTo Reference from 'Fn::ImportValue'</li>
+    <li>Navigation:GoTo Reference from '${self:xxxx}'</li>
+    <li>Navigation:GoTo Step definition from Step usages</li>
+    </ul>
+
+    <h2>Syntax</h2>
+    <ul>
+    <li>Syntax:Unknown included file '${file(...)}'</li>
+    <li>Syntax:Unknown lambda used in 'Fn::GetAtt'</li>
+    <li>Syntax:Unknown Step used in State Machine</li>
+    <li>Syntax:Unknown lambda code defined in 'handler'</li>
+    <li>Syntax:Unused Step in State Machine</li>
+    </ul>
+
+    <h2>Completion</h2>
+    <ul>
+    <li>AWS provider</li>
+    </ul>
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

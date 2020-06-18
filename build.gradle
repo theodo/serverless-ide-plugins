@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.theodo.serverless.plugin'
-version '1.0-SNAPSHOT'
+version '0.5'
 
 repositories {
     mavenCentral()
@@ -25,6 +25,5 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      - v0.5.0: first BETA version<br>"""
 }
