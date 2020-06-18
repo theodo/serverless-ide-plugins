@@ -42,13 +42,13 @@ public class SlsFunctionNavigationHandler implements GotoDeclarationHandler {
                 VirtualFile virtualFile = containingFile.getVirtualFile();
                 VirtualFile directory = virtualFile.getParent();
 
-                PsiElement codeFile = tryToOpenCodeFile(sourceElement, fileAndMethod[0] + ".ts", directory);
+                PsiElement codeFile = findMatchingPsiFile(sourceElement, fileAndMethod[0] + ".ts", directory);
                 if (codeFile != null) return new PsiElement[] {codeFile};
 
-                codeFile = tryToOpenCodeFile(sourceElement, fileAndMethod[0] + ".js", directory);
+                codeFile = findMatchingPsiFile(sourceElement, fileAndMethod[0] + ".js", directory);
                 if (codeFile != null) return new PsiElement[] {codeFile};
 
-                codeFile = tryToOpenCodeFile(sourceElement, fileAndMethod[0] + ".py", directory);
+                codeFile = findMatchingPsiFile(sourceElement, fileAndMethod[0] + ".py", directory);
                 if (codeFile != null) return new PsiElement[] {codeFile};
 
             }
@@ -58,7 +58,7 @@ public class SlsFunctionNavigationHandler implements GotoDeclarationHandler {
         return null;
     }
 
-    public static PsiElement  tryToOpenCodeFile(@NotNull PsiElement sourceElement, String relativePath, VirtualFile directory) {
+    public static PsiElement findMatchingPsiFile(@NotNull PsiElement sourceElement, String relativePath, VirtualFile directory) {
         VirtualFile destFile = LocalFileSystem.getInstance().findFileByPath(directory.getPath() + File.separator + relativePath);
         if (destFile != null) {
             return PsiManager.getInstance(sourceElement.getProject()).findFile(destFile);

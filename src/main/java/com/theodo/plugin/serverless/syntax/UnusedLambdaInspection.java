@@ -12,7 +12,7 @@ import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 
 import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.isLambda;
-import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.tryToOpenCodeFile;
+import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.findMatchingPsiFile;
 
 public class UnusedLambdaInspection extends LocalInspectionTool {
 
@@ -39,13 +39,13 @@ public class UnusedLambdaInspection extends LocalInspectionTool {
                     VirtualFile virtualFile = containingFile.getVirtualFile();
                     VirtualFile directory = virtualFile.getParent();
 
-                    PsiElement codeFile = tryToOpenCodeFile(keyValue, fileAndMethod[0] + ".ts", directory);
+                    PsiElement codeFile = findMatchingPsiFile(keyValue, fileAndMethod[0] + ".ts", directory);
                     if (codeFile != null) return;
 
-                    codeFile = tryToOpenCodeFile(keyValue, fileAndMethod[0] + ".js", directory);
+                    codeFile = findMatchingPsiFile(keyValue, fileAndMethod[0] + ".js", directory);
                     if (codeFile != null) return;
 
-                    codeFile = tryToOpenCodeFile(keyValue, fileAndMethod[0] + ".py", directory);
+                    codeFile = findMatchingPsiFile(keyValue, fileAndMethod[0] + ".py", directory);
                     if (codeFile != null) return;
 
                     if (keyValue.getValue() != null) {

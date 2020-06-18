@@ -12,9 +12,8 @@ import org.jetbrains.yaml.YAMLUtil;
 import org.jetbrains.yaml.psi.YAMLFile;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
-/**
- * NAVIGATE from '${self:something} to something DEFINITION
- */
+import static com.theodo.plugin.serverless.navigation.utils.LambdaHelper.isCallingStep;
+
 public class SlsStepsNavigationHandler implements GotoDeclarationHandler {
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
@@ -22,8 +21,7 @@ public class SlsStepsNavigationHandler implements GotoDeclarationHandler {
         if (elementType == YAMLTokenTypes.TEXT || elementType == YAMLTokenTypes.SCALAR_STRING) {
             YAMLKeyValue parent = PsiTreeUtil.getParentOfType(sourceElement, YAMLKeyValue.class);
             if (parent == null) return null;
-            String keyText = parent.getKeyText();
-            if ("Next".equals(keyText) || "Default".equals(keyText)) {
+            if (isCallingStep(parent.getKeyText())) {
                 YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) sourceElement.getContainingFile(), "States", sourceElement.getText());
                 if (qualifiedKeyInFile != null) return new PsiElement[]{qualifiedKeyInFile};
             }

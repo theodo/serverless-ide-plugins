@@ -21,9 +21,6 @@ import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * NAVIGATE from '${self:something} to something DEFINITION
- */
 public class SlsRefNavigationHandler implements GotoDeclarationHandler {
     private static final Pattern REF_PATTERN = Pattern.compile("(?:\\$\\{self:([^$^}]*))");
 

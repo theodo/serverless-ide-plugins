@@ -31,7 +31,7 @@ public class SlsCompletionContributor extends CompletionContributor {
     public SlsCompletionContributor() {
         extend(CompletionType.BASIC,
                 getCompletionPattern(),
-                new CompletionProvider<>() {
+                new CompletionProvider<CompletionParameters>() {
                     public void addCompletions(@NotNull CompletionParameters parameters,
                                                @NotNull ProcessingContext context,
                                                @NotNull CompletionResultSet resultSet) {
@@ -73,7 +73,7 @@ public class SlsCompletionContributor extends CompletionContributor {
         return PlatformPatterns.psiFile().with(SLS_YAML_CONFIGURATION);
     }
 
-    private static final PatternCondition<PsiFile> SLS_YAML_CONFIGURATION = new PatternCondition<>("SLS definition files") {
+    private static final PatternCondition<PsiFile> SLS_YAML_CONFIGURATION = new PatternCondition<PsiFile>("SLS definition files") {
         @Override
         public boolean accepts(@NotNull PsiFile psiFile, ProcessingContext processingContext) {
             return psiFile.getFileType() == YAMLFileType.YML;// Without any other indicator in the file itself, it's difficult to say if a YAML is or not 'serverless'

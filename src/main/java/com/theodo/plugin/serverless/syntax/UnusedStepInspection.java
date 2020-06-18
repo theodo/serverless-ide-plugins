@@ -11,6 +11,8 @@ import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 import org.jetbrains.yaml.psi.YamlRecursivePsiElementVisitor;
 
+import static com.theodo.plugin.serverless.navigation.utils.LambdaHelper.isCallingStep;
+
 public class UnusedStepInspection extends LocalInspectionTool {
 
     public @Nullable String getStaticDescription() {
@@ -53,7 +55,7 @@ public class UnusedStepInspection extends LocalInspectionTool {
 
         @Override
         public void visitKeyValue(@NotNull YAMLKeyValue keyValue) {
-            if("Next".equals(keyValue.getKeyText()) || "StartAt".equals(keyValue.getKeyText()) || "Default".equals(keyValue.getKeyText())){
+            if(isCallingStep(keyValue.getKeyText())){
                 if(keyValue.getValueText().equals(stepName)){
                     foundUsage = true;
                 }

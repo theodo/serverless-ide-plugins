@@ -18,6 +18,8 @@ import static com.theodo.plugin.serverless.navigation.SlsArnRefNavigationHandler
 
 public class UnknownLambdaInspection extends LocalInspectionTool {
 
+    private static final String FN_GET_ATT = "Fn::GetAtt";
+
     public @Nullable String getStaticDescription() {
         return "Highlight Unknown Lambda";
     }
@@ -28,7 +30,7 @@ public class UnknownLambdaInspection extends LocalInspectionTool {
         return new YamlPsiElementVisitor() {
             @Override
             public void visitKeyValue(@NotNull YAMLKeyValue keyValue) {
-                if (!"Fn::GetAtt".equals(keyValue.getKeyText())) {
+                if (!FN_GET_ATT.equals(keyValue.getKeyText())) {
                     return;
                 }
                 YAMLValue value = keyValue.getValue();

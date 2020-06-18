@@ -2,10 +2,8 @@ package com.theodo.plugin.serverless.syntax;
 
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
@@ -13,13 +11,11 @@ import org.jetbrains.yaml.psi.YAMLSequenceItem;
 import org.jetbrains.yaml.psi.YAMLValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 
-import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static com.theodo.plugin.serverless.navigation.utils.IncludedFileHelper.findVirtualFile;
+import static com.theodo.plugin.serverless.navigation.utils.IncludedFileHelper.getRelativeFilePath;
 
 public class UnknownIncludedFileInspection extends LocalInspectionTool {
 
-    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\).*}");
 
     public @Nullable String getStaticDescription() {
         return "Highlight Undefined Included files";
@@ -46,14 +42,9 @@ public class UnknownIncludedFileInspection extends LocalInspectionTool {
 
             private void detect(YAMLValue sourceElement) {
                 String text = sourceElement.getText();
-                Matcher matcher = FILE_PATTERN.matcher(text);
-                if(matcher.matches()) {
-                    String destination = matcher.group(1);
-                    PsiFile containingFile = sourceElement.getContainingFile();
-                    VirtualFile virtualFile = containingFile.getVirtualFile();
-                    VirtualFile parent = virtualFile.getParent();
-
-                    VirtualFile destFile = LocalFileSystem.getInstance().findFileByPath(parent.getPath() + File.separator + destination);
+                String relativeFilePath = getRelativeFilePath(text);
+                if(relativeFilePath != null) {
+                    VirtualFile destFile = findVirtualFile(sourceElement, relativeFilePath);
                     if(destFile == null){
                         holder.registerProblem(sourceElement, "Included File not found");
                     }

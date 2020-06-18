@@ -24,6 +24,8 @@ import java.util.List;
  */
 public class SlsArnRefNavigationHandler implements GotoDeclarationHandler {
 
+    private static final String FN_GET_ATT = "Fn::GetAtt";
+
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
         final IElementType elementType = PsiUtilCore.getElementType(sourceElement);
@@ -31,7 +33,7 @@ public class SlsArnRefNavigationHandler implements GotoDeclarationHandler {
             YAMLKeyValue parent = PsiTreeUtil.getParentOfType(sourceElement, YAMLKeyValue.class);
             if (parent == null) return null;
 
-            if (!"Fn::GetAtt".equals(parent.getKeyText())) {
+            if (!FN_GET_ATT.equals(parent.getKeyText())) {
                 return null;
             }
 

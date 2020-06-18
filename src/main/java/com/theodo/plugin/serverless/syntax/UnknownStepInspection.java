@@ -10,6 +10,8 @@ import org.jetbrains.yaml.psi.YAMLFile;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 
+import static com.theodo.plugin.serverless.navigation.utils.LambdaHelper.isCallingStep;
+
 public class UnknownStepInspection extends LocalInspectionTool {
 
     public @Nullable String getStaticDescription() {
@@ -22,7 +24,7 @@ public class UnknownStepInspection extends LocalInspectionTool {
         return new YamlPsiElementVisitor() {
             @Override
             public void visitKeyValue(@NotNull YAMLKeyValue keyValue) {
-                if ("Next".equals(keyValue.getKeyText()) || "StartAt".equals(keyValue.getKeyText())) {
+                if (isCallingStep(keyValue.getKeyText())) {
                     String targetStepName = keyValue.getValueText();
                     YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) keyValue.getContainingFile(), "States", targetStepName);
                     if(qualifiedKeyInFile == null){

@@ -14,9 +14,6 @@ import org.jetbrains.yaml.YAMLFileType;
 import org.jetbrains.yaml.YAMLTokenTypes;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
-/**
- * NAVIGATE from 'Fn::ImportValue : xxxx TO value definition found in any YAML file under tag Export: Name: xxxx
- */
 public class SlsImportValueNavigationHandler implements GotoDeclarationHandler {
 
     @Override
