@@ -10,7 +10,7 @@ import org.jetbrains.yaml.psi.YAMLFile;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 
-import static com.theodo.plugin.serverless.navigation.utils.LambdaHelper.isCallingStep;
+import static com.theodo.plugin.serverless.utils.LambdaHelper.isCallingStep;
 
 public class UnknownStepInspection extends LocalInspectionTool {
 

@@ -10,7 +10,7 @@ import org.jetbrains.yaml.psi.*;
 
 import java.util.List;
 
-import static com.theodo.plugin.serverless.navigation.utils.RefHelper.searchReference;
+import static com.theodo.plugin.serverless.utils.RefHelper.searchReference;
 
 public class UnknownReferenceInspection extends LocalInspectionTool {
 
@@ -43,7 +43,7 @@ public class UnknownReferenceInspection extends LocalInspectionTool {
 
                 PsiElement[] psiElements = searchReference(element.getValue());
                 if (psiElements == null || psiElements.length == 0) {
-                    holder.registerProblem(keyValue, "Can't find lambda reference");
+                    holder.registerProblem(keyValue, "Can't find reference");
                 }
 
             }

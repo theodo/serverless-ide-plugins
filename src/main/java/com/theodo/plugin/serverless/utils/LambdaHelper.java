@@ -1,4 +1,4 @@
-package com.theodo.plugin.serverless.navigation.utils;
+package com.theodo.plugin.serverless.utils;
 
 public class LambdaHelper {
     public static boolean isCallingStep(String stepFunctionTag){

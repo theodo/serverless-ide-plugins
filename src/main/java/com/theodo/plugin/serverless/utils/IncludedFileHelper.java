@@ -1,9 +1,10 @@
-package com.theodo.plugin.serverless.navigation.utils;
+package com.theodo.plugin.serverless.utils;
 
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.regex.Matcher;
@@ -20,7 +21,7 @@ public class IncludedFileHelper {
         return null;
     }
 
-    public static @org.jetbrains.annotations.Nullable VirtualFile findVirtualFile(PsiElement sourceElement, String relativeFilePath){
+    public static @Nullable VirtualFile findVirtualFile(PsiElement sourceElement, String relativeFilePath){
         PsiFile containingFile = sourceElement.getContainingFile();
         VirtualFile virtualFile = containingFile.getVirtualFile();
         VirtualFile parent = virtualFile.getParent();

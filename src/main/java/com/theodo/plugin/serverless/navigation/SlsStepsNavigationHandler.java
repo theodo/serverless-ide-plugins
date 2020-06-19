@@ -12,7 +12,7 @@ import org.jetbrains.yaml.YAMLUtil;
 import org.jetbrains.yaml.psi.YAMLFile;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
-import static com.theodo.plugin.serverless.navigation.utils.LambdaHelper.isCallingStep;
+import static com.theodo.plugin.serverless.utils.LambdaHelper.isCallingStep;
 
 public class SlsStepsNavigationHandler implements GotoDeclarationHandler {
     @Override

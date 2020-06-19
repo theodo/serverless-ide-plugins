@@ -70,7 +70,7 @@
                          groupBundle="messages.InspectionsBundle"
                          groupKey="group.names.probable.bugs"
                          displayName="Lambda code file not found"
-                         implementationClass="com.theodo.plugin.serverless.syntax.UnusedLambdaInspection"/>
+                         implementationClass="com.theodo.plugin.serverless.syntax.UnknownLambdaInspection"/>
 
         <localInspection language="yaml"
                          enabledByDefault="true"

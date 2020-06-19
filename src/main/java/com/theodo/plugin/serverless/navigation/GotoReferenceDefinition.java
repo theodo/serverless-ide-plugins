@@ -15,7 +15,7 @@ import org.jetbrains.yaml.psi.YAMLValue;
 
 import java.util.List;
 
-import static com.theodo.plugin.serverless.navigation.utils.RefHelper.searchReference;
+import static com.theodo.plugin.serverless.utils.RefHelper.searchReference;
 
 /**
  * NAVIGATE from 'Fn::GetAtt [ value, 'ARN'] TO value definition found in any YAML file

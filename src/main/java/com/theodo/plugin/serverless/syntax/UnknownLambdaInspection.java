@@ -14,7 +14,7 @@ import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.isLambda;
 import static com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler.findMatchingPsiFile;
 
-public class UnusedLambdaInspection extends LocalInspectionTool {
+public class UnknownLambdaInspection extends LocalInspectionTool {
 
     public @Nullable String getStaticDescription() {
         return "Highlight Lambda with undefined code";

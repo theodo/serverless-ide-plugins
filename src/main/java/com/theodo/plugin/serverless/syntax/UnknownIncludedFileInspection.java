@@ -11,8 +11,8 @@ import org.jetbrains.yaml.psi.YAMLSequenceItem;
 import org.jetbrains.yaml.psi.YAMLValue;
 import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
 
-import static com.theodo.plugin.serverless.navigation.utils.IncludedFileHelper.findVirtualFile;
-import static com.theodo.plugin.serverless.navigation.utils.IncludedFileHelper.getRelativeFilePath;
+import static com.theodo.plugin.serverless.utils.IncludedFileHelper.findVirtualFile;
+import static com.theodo.plugin.serverless.utils.IncludedFileHelper.getRelativeFilePath;
 
 public class UnknownIncludedFileInspection extends LocalInspectionTool {
 

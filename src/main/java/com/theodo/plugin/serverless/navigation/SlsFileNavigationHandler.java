@@ -11,8 +11,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.YAMLTokenTypes;
 
-import static com.theodo.plugin.serverless.navigation.utils.IncludedFileHelper.findVirtualFile;
-import static com.theodo.plugin.serverless.navigation.utils.IncludedFileHelper.getRelativeFilePath;
+import static com.theodo.plugin.serverless.utils.IncludedFileHelper.findVirtualFile;
+import static com.theodo.plugin.serverless.utils.IncludedFileHelper.getRelativeFilePath;
 
 /**
  * NAVIGATE from '${file:path/path/file} TO the file ./path/path/file

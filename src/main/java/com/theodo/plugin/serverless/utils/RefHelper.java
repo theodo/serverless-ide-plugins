@@ -1,4 +1,4 @@
-package com.theodo.plugin.serverless.navigation.utils;
+package com.theodo.plugin.serverless.utils;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;

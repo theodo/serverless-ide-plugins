@@ -8,7 +8,7 @@ import com.intellij.psi.search.PsiSearchHelper;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.theodo.plugin.serverless.navigation.utils.SearchInYamlFileProcessor;
+import com.theodo.plugin.serverless.utils.SearchInYamlFileProcessor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.YAMLFileType;
 import org.jetbrains.yaml.YAMLTokenTypes;
