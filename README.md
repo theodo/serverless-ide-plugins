@@ -48,3 +48,5 @@ Search for lambda definition with erroneous associated code file
 - Syntax highlighting of errors: an included file not found<br>
 Search for include tags leading to non existing included file.
 ![alt text](./docs/syntax.included.file.not.found.png "Lambda Code not found")
+
+XXXX
