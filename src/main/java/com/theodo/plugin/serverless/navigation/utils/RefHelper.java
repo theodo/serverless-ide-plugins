@@ -1,5 +1,6 @@
 package com.theodo.plugin.serverless.navigation.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -28,6 +29,8 @@ public class RefHelper {
             if(restrictToLambda && !isLambda(keyValue)) return false;
 
             if(keyValue.getKeyText().equals(searchedText)) return true;
+            if(StringUtil.capitalize(keyValue.getKeyText()).equals(searchedText)) return true;
+
             return "id".equals(keyValue.getKeyText()) && keyValue.getValueText().equals(searchedText);
         };
 
