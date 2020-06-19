@@ -15,6 +15,7 @@ import static com.theodo.plugin.serverless.utils.RefHelper.searchReference;
 public class UnknownReferenceInspection extends LocalInspectionTool {
 
     private static final String FN_GET_ATT = "Fn::GetAtt";
+    private static final String REF = "Ref";
 
     public @Nullable String getStaticDescription() {
         return "Highlight Unknown Reference";
@@ -26,10 +27,17 @@ public class UnknownReferenceInspection extends LocalInspectionTool {
         return new YamlPsiElementVisitor() {
             @Override
             public void visitKeyValue(@NotNull YAMLKeyValue keyValue) {
-                if (!FN_GET_ATT.equals(keyValue.getKeyText())) {
-                    return;
+                if (FN_GET_ATT.equals(keyValue.getKeyText())) {
+                    searchInSequences(keyValue.getValue());
+                } else if (REF.equals(keyValue.getKeyText())) {
+                    PsiElement[] psiElements = searchReference(keyValue.getValue());
+                    if (psiElements == null || psiElements.length == 0) {
+                       holder.registerProblem(keyValue.getValue(), "Can't find reference");
+                   }
                 }
-                YAMLValue value = keyValue.getValue();
+            }
+
+            private void searchInSequences(YAMLValue value) {
                 if (!(value instanceof YAMLSequence)) {
                     return;
                 }
@@ -41,11 +49,13 @@ public class UnknownReferenceInspection extends LocalInspectionTool {
                 YAMLSequenceItem element = items.get(0);
                 if(element == null) return;
 
-                PsiElement[] psiElements = searchReference(element.getValue());
-                if (psiElements == null || psiElements.length == 0) {
-                    holder.registerProblem(keyValue, "Can't find reference");
-                }
+                YAMLValue elementValue = element.getValue();
+                if(elementValue == null) return;
 
+                PsiElement[] psiElements = searchReference(elementValue);
+                if (psiElements == null || psiElements.length == 0) {
+                    holder.registerProblem(elementValue, "Can't find reference");
+                }
             }
         };
     }

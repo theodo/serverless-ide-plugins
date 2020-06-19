@@ -9,11 +9,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.YAMLTokenTypes;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
-import org.jetbrains.yaml.psi.YAMLSequence;
-import org.jetbrains.yaml.psi.YAMLSequenceItem;
-import org.jetbrains.yaml.psi.YAMLValue;
-
-import java.util.List;
 
 import static com.theodo.plugin.serverless.utils.RefHelper.searchReference;
 
@@ -23,6 +18,7 @@ import static com.theodo.plugin.serverless.utils.RefHelper.searchReference;
 public class GotoReferenceDefinition implements GotoDeclarationHandler {
 
     private static final String FN_GET_ATT = "Fn::GetAtt";
+    private static final String REF = "Ref";
 
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
@@ -31,18 +27,9 @@ public class GotoReferenceDefinition implements GotoDeclarationHandler {
             YAMLKeyValue parent = PsiTreeUtil.getParentOfType(sourceElement, YAMLKeyValue.class);
             if (parent == null) return null;
 
-            if (!FN_GET_ATT.equals(parent.getKeyText())) {
+            if (!FN_GET_ATT.equals(parent.getKeyText()) && !REF.equals(parent.getKeyText())) {
                 return null;
             }
-
-            YAMLValue value = parent.getValue();
-            if (!(value instanceof YAMLSequence)) {
-                return null;
-            }
-
-            YAMLSequence sequence = (YAMLSequence) value;
-            List<YAMLSequenceItem> items = sequence.getItems();
-            if (items.isEmpty()) return null;
 
             return searchReference(sourceElement);
         }
