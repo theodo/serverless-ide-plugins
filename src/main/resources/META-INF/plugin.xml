@@ -46,7 +46,7 @@
                                 order="last"/>
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsFunctionNavigationHandler"
                                 order="last"/>
-        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsArnRefNavigationHandler"
+        <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.GotoReferenceDefinition"
                                 order="last"/>
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsStepsNavigationHandler"
                                 order="last"/>
@@ -84,7 +84,7 @@
                          groupBundle="messages.InspectionsBundle"
                          groupKey="group.names.probable.bugs"
                          displayName="Lambda code file not found"
-                         implementationClass="com.theodo.plugin.serverless.syntax.UnknownLambdaInspection"/>
+                         implementationClass="com.theodo.plugin.serverless.syntax.UnknownReferenceInspection"/>
 
     </extensions>
 

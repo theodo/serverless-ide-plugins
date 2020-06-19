@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.theodo.serverless.plugin'
-version '0.5'
+version '0.5.1'
 
 repositories {
     mavenCentral()
@@ -25,5 +25,7 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      - v0.5.0: first BETA version<br>"""
+      - v0.5.0: first BETA version<br>
+      - v0.5.1: fix issues on navigation from references to definition (ARN -> definition)<br>
+      """
 }

@@ -6,22 +6,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.yaml.psi.YAMLKeyValue;
-import org.jetbrains.yaml.psi.YAMLSequenceItem;
-import org.jetbrains.yaml.psi.YAMLValue;
-import org.jetbrains.yaml.psi.YamlPsiElementVisitor;
-import org.jetbrains.yaml.psi.impl.YAMLArrayImpl;
+import org.jetbrains.yaml.psi.*;
 
 import java.util.List;
 
-import static com.theodo.plugin.serverless.navigation.SlsArnRefNavigationHandler.searchLambdaInFiles;
+import static com.theodo.plugin.serverless.navigation.utils.RefHelper.searchReference;
 
-public class UnknownLambdaInspection extends LocalInspectionTool {
+public class UnknownReferenceInspection extends LocalInspectionTool {
 
     private static final String FN_GET_ATT = "Fn::GetAtt";
 
     public @Nullable String getStaticDescription() {
-        return "Highlight Unknown Lambda";
+        return "Highlight Unknown Reference";
     }
 
     @NotNull
@@ -34,20 +30,20 @@ public class UnknownLambdaInspection extends LocalInspectionTool {
                     return;
                 }
                 YAMLValue value = keyValue.getValue();
-                if (!(value instanceof YAMLArrayImpl)) {
+                if (!(value instanceof YAMLSequence)) {
                     return;
                 }
 
-                YAMLArrayImpl sequence = (YAMLArrayImpl) value;
+                YAMLSequence sequence = (YAMLSequence) value;
                 List<YAMLSequenceItem> items = sequence.getItems();
                 if (items.isEmpty()) return;
 
                 YAMLSequenceItem element = items.get(0);
                 if(element == null) return;
 
-                PsiElement[] psiElements = searchLambdaInFiles(element.getValue());
+                PsiElement[] psiElements = searchReference(element.getValue());
                 if (psiElements == null || psiElements.length == 0) {
-                    holder.registerProblem(keyValue, "Can't find lambda definition");
+                    holder.registerProblem(keyValue, "Can't find lambda reference");
                 }
 
             }
