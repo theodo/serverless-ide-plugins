@@ -15,7 +15,7 @@ import static com.theodo.plugin.serverless.utils.RefHelper.searchReference;
 /**
  * NAVIGATE from 'Fn::GetAtt [ value, 'ARN'] TO value definition found in any YAML file
  */
-public class GotoReferenceDefinition implements GotoDeclarationHandler {
+public class SlsGotoReferenceDefinition implements GotoDeclarationHandler {
 
     private static final String FN_GET_ATT = "Fn::GetAtt";
     private static final String REF = "Ref";
