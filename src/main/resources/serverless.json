@@ -278,26 +278,6 @@
             },
             "type": "object"
         },
-        "Aws.CloudwatchEventType": {
-            "properties": {
-                "detail": {
-                    "$ref": "#/definitions/Aws.Detail"
-                },
-                "detail-type": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "source": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
         "Aws.CloudwatchLog": {
             "properties": {
                 "filter": {
@@ -366,6 +346,11 @@
                 "trigger": {
                     "type": "string"
                 }
+            },
+            "type": "object"
+        },
+        "Aws.Custom": {
+            "additionalProperties": {
             },
             "type": "object"
         },
@@ -542,11 +527,21 @@
         },
         "Aws.Http": {
             "properties": {
+                "async": {
+                    "type": "boolean"
+                },
                 "authorizer": {
                     "$ref": "#/definitions/Aws.HttpAuthorizer"
                 },
                 "cors": {
-                    "type": "boolean"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Aws.HttpCors"
+                        },
+                        {
+                            "type": "boolean"
+                        }
+                    ]
                 },
                 "method": {
                     "type": "string"
@@ -556,6 +551,9 @@
                 },
                 "private": {
                     "type": "boolean"
+                },
+                "request": {
+                    "$ref": "#/definitions/Aws.HttpRequestValidation"
                 }
             },
             "type": "object"
@@ -638,6 +636,76 @@
                 },
                 "type": {
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpCors": {
+            "properties": {
+                "allowCredentials": {
+                    "type": "boolean"
+                },
+                "cacheControl": {
+                    "type": "string"
+                },
+                "headers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "maxAge": {
+                    "type": "number"
+                },
+                "origins": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpRequestParametersValidation": {
+            "properties": {
+                "headers": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object"
+                },
+                "paths": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object"
+                },
+                "querystrings": {
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.HttpRequestValidation": {
+            "properties": {
+                "parameters": {
+                    "$ref": "#/definitions/Aws.HttpRequestParametersValidation"
+                },
+                "schema": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 }
             },
             "type": "object"
@@ -1031,6 +1099,11 @@
                     "type": "string"
                 },
                 "endpointType": {
+                    "enum": [
+                        "edge",
+                        "private",
+                        "regional"
+                    ],
                     "type": "string"
                 },
                 "environment": {
@@ -1389,32 +1462,6 @@
             },
             "type": "object"
         },
-        "Aws.Serverless": {
-            "properties": {
-                "frameworkVersion": {
-                    "type": "string"
-                },
-                "functions": {
-                    "$ref": "#/definitions/Aws.Functions"
-                },
-                "layers": {
-                    "$ref": "#/definitions/Aws.Layers"
-                },
-                "package": {
-                    "$ref": "#/definitions/Aws.Package"
-                },
-                "provider": {
-                    "$ref": "#/definitions/Aws.Provider"
-                },
-                "resources": {
-                    "$ref": "#/definitions/Aws.Resources"
-                },
-                "service": {
-                    "$ref": "#/definitions/Aws.Service"
-                }
-            },
-            "type": "object"
-        },
         "Aws.Service": {
             "properties": {
                 "awsKmsKeyArn": {
@@ -1615,11 +1662,54 @@
             "type": "object"
         }
     },
-
-    "allOf": [
-      {
-        "$ref": "#/definitions/Aws.Serverless"
-      }
-    ]
+    "properties": {
+        "app": {
+            "type": "string"
+        },
+        "custom": {
+            "$ref": "#/definitions/Aws.Custom"
+        },
+        "frameworkVersion": {
+            "type": "string"
+        },
+        "functions": {
+            "$ref": "#/definitions/Aws.Functions"
+        },
+        "layers": {
+            "$ref": "#/definitions/Aws.Layers"
+        },
+        "org": {
+            "type": "string"
+        },
+        "package": {
+            "$ref": "#/definitions/Aws.Package"
+        },
+        "plugins": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "provider": {
+            "$ref": "#/definitions/Aws.Provider"
+        },
+        "resources": {
+            "$ref": "#/definitions/Aws.Resources"
+        },
+        "service": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Aws.Service"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "tenant": {
+            "type": "string"
+        }
+    },
+    "type": "object"
 }
 
