@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.theodo.serverless.plugin'
-version '0.5.2'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -28,5 +28,7 @@ patchPluginXml {
       - v0.5.0: first BETA version<br>
       - v0.5.1: fix issues on navigation from references to definition (ARN -> definition)<br>
       - v0.5.2: fix completion for apigateway (async, cors, validations)<br>
+      - v0.5.3: be more precise in navigation to file<br>
+      - v1.0.0: first STABLE version<br>
       """
 }
