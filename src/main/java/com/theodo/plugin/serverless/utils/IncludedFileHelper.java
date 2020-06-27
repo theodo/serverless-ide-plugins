@@ -4,6 +4,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -11,12 +12,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IncludedFileHelper {
-    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\).*}");
+    private static final Pattern FILE_PATTERN = Pattern.compile("\\$\\{file\\((.*)\\)(.*)}");
 
-    public static String getRelativeFilePath(String textElement){
+    public static class PropertyInFile {
+        public final String relativeFilePath;
+        public final @NotNull String propertyName;
+
+        public PropertyInFile(String relativeFilePath, String propertyName) {
+            this.relativeFilePath = relativeFilePath;
+            this.propertyName = propertyName != null ? propertyName.replace(":", "") : "";
+        }
+    }
+
+    public static PropertyInFile getRelativeFilePath(String textElement){
         Matcher matcher = FILE_PATTERN.matcher(textElement);
         if(matcher.matches()) {
-            return matcher.group(1);
+            return new PropertyInFile(matcher.group(1), matcher.group(2));
         }
         return null;
     }

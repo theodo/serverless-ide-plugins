@@ -8,8 +8,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.theodo.plugin.serverless.utils.IncludedFileHelper;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.YAMLTokenTypes;
+import org.jetbrains.yaml.YAMLUtil;
+import org.jetbrains.yaml.psi.YAMLFile;
+import org.jetbrains.yaml.psi.YAMLKeyValue;
 
 import static com.theodo.plugin.serverless.utils.IncludedFileHelper.findVirtualFile;
 import static com.theodo.plugin.serverless.utils.IncludedFileHelper.getRelativeFilePath;
@@ -24,11 +28,18 @@ public class SlsFileNavigationHandler implements GotoDeclarationHandler {
         final IElementType elementType = PsiUtilCore.getElementType(sourceElement);
         if (elementType == YAMLTokenTypes.TEXT || elementType == YAMLTokenTypes.SCALAR_STRING) {
             String text = sourceElement.getText();
-            String relativeFilePath = getRelativeFilePath(text);
+            IncludedFileHelper.PropertyInFile relativeFilePath = getRelativeFilePath(text);
             if(relativeFilePath != null){
-                VirtualFile destFile = findVirtualFile(sourceElement, relativeFilePath);
+                VirtualFile destFile = findVirtualFile(sourceElement, relativeFilePath.relativeFilePath);
                 if(destFile != null) {
                     PsiFile file = PsiManager.getInstance(sourceElement.getProject()).findFile(destFile);
+                    if(file instanceof YAMLFile && !relativeFilePath.propertyName.isBlank()) {
+                        String[] paths = relativeFilePath.propertyName.split("\\.");
+                        YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) file, paths);
+                        if(qualifiedKeyInFile != null){
+                            return new PsiElement[]{qualifiedKeyInFile};
+                        }
+                    }
                     return new PsiElement[]{file};
                 }
             }
