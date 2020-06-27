@@ -33,7 +33,7 @@ public class SlsFileNavigationHandler implements GotoDeclarationHandler {
                 VirtualFile destFile = findVirtualFile(sourceElement, relativeFilePath.relativeFilePath);
                 if(destFile != null) {
                     PsiFile file = PsiManager.getInstance(sourceElement.getProject()).findFile(destFile);
-                    if(file instanceof YAMLFile && relativeFilePath.propertyName != null) {
+                    if(file instanceof YAMLFile && !relativeFilePath.propertyName.isBlank()) {
                         String[] paths = relativeFilePath.propertyName.split("\\.");
                         YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) file, paths);
                         if(qualifiedKeyInFile != null){

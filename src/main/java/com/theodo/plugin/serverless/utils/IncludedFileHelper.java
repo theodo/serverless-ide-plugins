@@ -4,6 +4,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -15,11 +16,11 @@ public class IncludedFileHelper {
 
     public static class PropertyInFile {
         public final String relativeFilePath;
-        public final String propertyName;
+        public final @NotNull String propertyName;
 
         public PropertyInFile(String relativeFilePath, String propertyName) {
             this.relativeFilePath = relativeFilePath;
-            this.propertyName = propertyName != null ? propertyName.replace(":", "") : null;
+            this.propertyName = propertyName != null ? propertyName.replace(":", "") : "";
         }
     }
 
