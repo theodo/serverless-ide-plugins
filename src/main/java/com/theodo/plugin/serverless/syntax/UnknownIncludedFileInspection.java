@@ -4,6 +4,7 @@ import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElementVisitor;
+import com.theodo.plugin.serverless.utils.IncludedFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
@@ -42,9 +43,9 @@ public class UnknownIncludedFileInspection extends LocalInspectionTool {
 
             private void detect(YAMLValue sourceElement) {
                 String text = sourceElement.getText();
-                String relativeFilePath = getRelativeFilePath(text);
+                IncludedFileHelper.PropertyInFile relativeFilePath = getRelativeFilePath(text);
                 if(relativeFilePath != null) {
-                    VirtualFile destFile = findVirtualFile(sourceElement, relativeFilePath);
+                    VirtualFile destFile = findVirtualFile(sourceElement, relativeFilePath.relativeFilePath);
                     if(destFile == null){
                         holder.registerProblem(sourceElement, "Included File not found");
                     }
