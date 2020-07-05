@@ -422,7 +422,6 @@
         },
         "Aws.Environment": {
             "additionalProperties": {
-                "type": "string"
             },
             "type": "object"
         },
@@ -581,27 +580,20 @@
         "Aws.HttpApiEvent": {
             "properties": {
                 "authorizer": {
-                    "$ref": "#/definitions/Aws.HttpApiEventAuthorizer"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Aws.NamedHttpApiEventAuthorizer"
+                        },
+                        {
+                            "$ref": "#/definitions/Aws.IdRefHttpApiEventAuthorizer"
+                        }
+                    ]
                 },
                 "method": {
                     "type": "string"
                 },
                 "path": {
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Aws.HttpApiEventAuthorizer": {
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "scopes": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 }
             },
             "type": "object"
@@ -649,10 +641,17 @@
                     "type": "string"
                 },
                 "headers": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "maxAge": {
                     "type": "number"
@@ -802,6 +801,20 @@
             },
             "type": "object"
         },
+        "Aws.IdRefHttpApiEventAuthorizer": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "scopes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
         "Aws.Input": {
             "additionalProperties": {
             },
@@ -902,13 +915,34 @@
                     "type": "boolean"
                 },
                 "httpApi": {
-                    "$ref": "#/definitions/Aws.HttpApiLogs"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Aws.HttpApiLogs"
+                        },
+                        {
+                            "type": "boolean"
+                        }
+                    ]
                 },
                 "restApi": {
                     "$ref": "#/definitions/Aws.RestApiLogs"
                 },
                 "websocket": {
                     "$ref": "#/definitions/Aws.WebsocketLogs"
+                }
+            },
+            "type": "object"
+        },
+        "Aws.NamedHttpApiEventAuthorizer": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "scopes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "type": "object"

@@ -30,5 +30,6 @@ patchPluginXml {
       - v0.5.2: fix completion for apigateway (async, cors, validations)<br>
       - v0.5.3: be more precise in navigation to file<br>
       - v1.0.0: first STABLE version<br>
+      - v1.0.1: Update completion dictionary<br>
       """
 }
