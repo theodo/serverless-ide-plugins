@@ -15,7 +15,7 @@ dependencies {
 }
 
 intellij {
-    version '2020.1'
+    version '2020.2'
 
     plugins = [
             'yaml',
@@ -31,5 +31,6 @@ patchPluginXml {
       - v0.5.3: be more precise in navigation to file<br>
       - v1.0.0: first STABLE version<br>
       - v1.0.1: Update completion dictionary<br>
+      - v1.0.2: IntelliJ 2020.2 alignment<br>
       """
 }
