@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.theodo.serverless.plugin'
-version '1.0.2'
+version '1.0.3'
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ dependencies {
 }
 
 intellij {
-    version '2020.2'
+    version '2020.3'
 
     plugins = [
             'yaml',
@@ -32,5 +32,6 @@ patchPluginXml {
       - v1.0.0: first STABLE version<br>
       - v1.0.1: Update completion dictionary<br>
       - v1.0.2: IntelliJ 2020.2 alignment<br>
+      - v1.0.3: IntelliJ 2020.3 alignment<br>
       """
 }
