@@ -12,6 +12,7 @@
     <li>Navigation:GoTo Reference from 'Fn::ImportValue'</li>
     <li>Navigation:GoTo Reference from '${self:xxxx}'</li>
     <li>Navigation:GoTo Step definition from Step usages</li>
+    <li>Navigation:Open AWS Documentation for CloudFormation resources</li>
     </ul>
 
     <h2>Syntax</h2>
@@ -49,6 +50,8 @@
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsGotoReferenceDefinition"
                                 order="last"/>
         <gotoDeclarationHandler implementation="com.theodo.plugin.serverless.navigation.SlsStepsNavigationHandler"
+                                order="last"/>
+        <documentationProvider implementation="com.theodo.plugin.serverless.navigation.SlsResourceDocumentationDefinition"
                                 order="last"/>
 
         <localInspection language="yaml"

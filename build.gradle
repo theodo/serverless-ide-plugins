@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.theodo.serverless.plugin'
-version '1.1.0'
+version '1.2.0'
 
 repositories {
     mavenCentral()
@@ -34,5 +34,6 @@ patchPluginXml {
       - v1.0.2: IntelliJ 2020.2 alignment<br>
       - v1.0.3: IntelliJ 2020.3 alignment<br>
       - v1.1.0: IntelliJ 2021.1 alignment<br>
+      - v1.2.0: Add 'Open AWS Documentation' for CloudFormation resources <br>
       """
 }
