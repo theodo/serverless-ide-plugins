@@ -31,6 +31,12 @@ Relies on https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/s
 Provides Completion for AWS provider tags.
 ![alt text](./docs/completion.png "AWS Completion")
 
+- Code completion for CloudFormation components in Resources<br>
+Relies on us-east-1 CloudFormation components definition<br>
+Provides Completion for CloudFormation Components in SLS Resources.
+![alt text](./docs/completion_cf.png "AWS CloudFormation Completion")
+
+
 <h3>Syntax Inspections</h3>
 
 - Syntax highlighting of errors: step not found<br>
