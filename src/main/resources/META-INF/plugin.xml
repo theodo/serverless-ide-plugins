@@ -13,6 +13,7 @@
     <li>Navigation:GoTo Reference from '${self:xxxx}'</li>
     <li>Navigation:GoTo Step definition from Step usages</li>
     <li>Navigation:Open AWS Documentation for CloudFormation resources</li>
+    <li>Navigation:Add CloudFormation Completion in Resources</li>
     </ul>
 
     <h2>Syntax</h2>
