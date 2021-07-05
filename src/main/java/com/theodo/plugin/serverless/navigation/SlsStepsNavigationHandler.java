@@ -19,9 +19,9 @@ public class SlsStepsNavigationHandler implements GotoDeclarationHandler {
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
         final IElementType elementType = PsiUtilCore.getElementType(sourceElement);
         if (elementType == YAMLTokenTypes.TEXT || elementType == YAMLTokenTypes.SCALAR_STRING) {
-            YAMLKeyValue parent = PsiTreeUtil.getParentOfType(sourceElement, YAMLKeyValue.class);
-            if (parent == null) return null;
-            if (isCallingStep(parent.getKeyText())) {
+            YAMLKeyValue keyValue = PsiTreeUtil.getParentOfType(sourceElement, YAMLKeyValue.class);
+            if (keyValue == null) return null;
+            if (isCallingStep(keyValue)) {
                 YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) sourceElement.getContainingFile(), "States", sourceElement.getText());
                 if (qualifiedKeyInFile != null) return new PsiElement[]{qualifiedKeyInFile};
             }

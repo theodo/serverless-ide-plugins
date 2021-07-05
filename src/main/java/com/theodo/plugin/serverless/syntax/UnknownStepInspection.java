@@ -24,7 +24,7 @@ public class UnknownStepInspection extends LocalInspectionTool {
         return new YamlPsiElementVisitor() {
             @Override
             public void visitKeyValue(@NotNull YAMLKeyValue keyValue) {
-                if (isCallingStep(keyValue.getKeyText())) {
+                if (isCallingStep(keyValue)) {
                     String targetStepName = keyValue.getValueText();
                     YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) keyValue.getContainingFile(), "States", targetStepName);
                     if(qualifiedKeyInFile == null){
